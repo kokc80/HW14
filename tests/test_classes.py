@@ -40,3 +40,5 @@ def test_category(Category_Smart):
     )
     assert Category_Smart.category_count == 1
     assert Category_Smart.product_count == 3
+
+д
