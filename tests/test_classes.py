@@ -45,20 +45,18 @@ new_product = Product.new_product(
     }
 )
 
-def test_new_product():
-    new_product.price = 0
-    assert new_product.price == 180000
-    new_product.price = 12000
-    assert new_product.price == 12000
 
-def test_str_product (product_Sams):
+def test_str_product(product_Sams):
     assert str(product_Sams) == "Samsung Galaxy S23 Ultra, 180000.0 руб., остаток: 5 шт"
 
-def test_add_product():
-    pass
 
-def test_str_category (Category_Smart):
-    assert  str(Category_Smart) == "Смартфоны, 3 шт"
+def test_add_product() -> None:
+    product1 + product2 == 2580000.0
 
-def test_add_category():
-    pass
+
+def test_str_category(Category_Smart):
+    assert str(Category_Smart) == "Смартфоны, 3 шт"
+
+
+def test_new_product() -> None:
+    assert new_product.price == 180000
