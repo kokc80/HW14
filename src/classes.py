@@ -42,9 +42,13 @@ class Product:
         new_product.price = 12000
         assert new_product.price == 12000
 
-    def __repr__(self):
-        return f"Product(name='{self.name}', description='{self.description}', price={self.price}, quantity={self.quantity})"
 
+    def __add__(self, other):
+        return (self.price*self.quantity + other.price*other.quantity)
+
+
+    def __str__(self):
+        return f"{self.name}', {self.price} руб., остаток: {self.quantity} шт"
 
 class Category:
     name: str
@@ -72,8 +76,8 @@ class Category:
         Category.product_count += 1
 
 
-    def __add__(self, other):
-        return (self.__price * self.quantity) + (other.__price * other.quantity)
+    def __str__(self):
+        return f'{self.name}, {self.age} лет'
 
 
     new_product = Product.new_product(
