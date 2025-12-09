@@ -50,3 +50,15 @@ def test_new_product():
     assert new_product.price == 180000
     new_product.price = 12000
     assert new_product.price == 12000
+
+def test_str_product (product_Sams):
+    assert str(product_Sams) == "Samsung Galaxy S23 Ultra, 180000.0 руб., остаток: 5 шт"
+
+def test_add_product():
+    pass
+
+def test_str_category (Category_Smart):
+    assert  str(Category_Smart) == "Смартфоны, 3 шт"
+
+def test_add_category():
+    pass

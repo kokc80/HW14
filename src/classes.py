@@ -1,7 +1,4 @@
 # класс продукт ветка дев
-
-
-
 class Product:
     name: str
     description: str
@@ -37,9 +34,7 @@ class Product:
         return cls(name, description, price, quantity)
 
     def test_new_product():
-        new_product.price = 0
         assert new_product.price == 180000
-        new_product.price = 12000
         assert new_product.price == 12000
 
 
@@ -48,7 +43,7 @@ class Product:
 
 
     def __str__(self):
-        return f"{self.name}', {self.price} руб., остаток: {self.quantity} шт"
+        return f"{self.name}, {self.price} руб., остаток: {self.quantity} шт"
 
 class Category:
     name: str
@@ -73,11 +68,11 @@ class Category:
 
     def add_product(self, product: Product):
         self.__products.append(product)
-        Category.product_count += 1
+        Category.product_count += self.product_count
 
 
     def __str__(self):
-        return f'{self.name}, {self.age} лет'
+        return f'{self.name}, {len(self.products)} шт'
 
 
     new_product = Product.new_product(
