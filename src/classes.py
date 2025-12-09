@@ -72,11 +72,15 @@ class Category:
         Category.product_count += 1
 
 
-new_product = Product.new_product(
-    {
+    def __add__(self, other):
+        return (self.__price * self.quantity) + (other.__price * other.quantity)
+
+
+    new_product = Product.new_product(
+        {
         "name": "Samsung Galaxy S23 Ultra",
         "description": "256GB, Серый цвет, 200MP камера",
         "price": 180000.0,
         "quantity": 5,
-    }
-)
+        }
+    )
