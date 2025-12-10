@@ -51,7 +51,7 @@ def test_str_product(product_Sams):
 
 
 def test_add_product() -> None:
-    product1 + product2 == 2580000.0
+    assert(product1 + product2) == 2580000.0
 
 
 def test_str_category(Category_Smart):
@@ -60,3 +60,10 @@ def test_str_category(Category_Smart):
 
 def test_new_product() -> None:
     assert new_product.price == 180000
+
+
+def test_add_product_Category(Category_Smart):
+    product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
+    count_test_1 = Category_Smart.product_count
+    Category.add_product(Category_Smart,product4)
+    assert Category_Smart.product_count == 4

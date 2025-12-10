@@ -2,13 +2,15 @@
 class Product:
     name: str
     description: str
-    price: float
+    _price: float
     quantity: int
+    count_category = 0
+    count_product = 0
 
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.price = price
+        self._price = price
         self.quantity = quantity
 
     @property
@@ -26,15 +28,15 @@ class Product:
     def new_product(cls, product_data):
         name = product_data.get("name")
         description = product_data.get("description")
-        price = product_data.get("price")
+        _price = product_data.get("price")
         quantity = product_data.get("quantity")
-        return cls(name, description, price, quantity)
+        return cls(name, description, _price, quantity)
 
     def __add__(self, other):
-        return self.price * self.quantity + other.price * other.quantity
+        return self._price * self.quantity + other._price * other.quantity
 
     def __str__(self):
-        return f"{self.name}, {self.price} руб., остаток: {self.quantity} шт"
+        return f"{self.name}, {self._price} руб., остаток: {self.quantity} шт"
 
 
 class Category:
@@ -44,23 +46,23 @@ class Category:
     category_count = 0
     product_count = 0
 
-    def __init__(self, name, description, products):
+    def __init__(self, name, description, __products):
         self.name = name
         self.description = description
-        self.__products = products
-        Category.category_count += 1
-        Category.product_count = len(products)
+        self.__products = __products
+        self.category_count += 1
+        self.product_count += len(__products)
 
     @property
     def products(self):
         product_str = ""
         for product in self.__products:
-            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт. \n"
+            product_str += f"{product.name}, {product._price} руб. Остаток: {product.quantity} шт. \n"
         return product_str
 
     def add_product(self, product: Product):
+        self.product_count += 1
         self.__products.append(product)
-        Category.product_count += self.product_count
 
     def __str__(self):
         return f"{self.name}, {self.product_count} шт"
