@@ -65,7 +65,10 @@ class Category:
         self.__products.append(product)
 
     def __str__(self):
-        return f"{self.name}, {self.product_count} шт"
+        prod_count = 0
+        for product in self.__products:
+            prod_count += product.quantity
+        return f"{self.name}, {prod_count} шт"
 
     new_product = Product.new_product(
         {
