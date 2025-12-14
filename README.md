@@ -16,3 +16,7 @@ class Category:
     product_count = 0
 в классе Сategory category_count и  product_count вычисляются при инициализации 
 
+# classes 2025.12.14
+Домашка 16.1 
+добавлен класс Smartphone 
+добавлен класс LawnGrass
