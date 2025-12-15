@@ -36,9 +36,9 @@ class Product:
 
     def __add__(self, other):
         """Сложение двух продуктов по цене и количеству, если оба продукта одного класса"""
-        if type(self) is type(other):
+        if isinstance(self, Category) is isinstance(other, Category):
             return (self.price * self.quantity) + (other.price * other.quantity)
-        raise TypeError(f"Нельзя добовлять продукт к смартфону: {type(self).__name__} и {type(other).__name__}")
+        raise TypeError(f"Нельзя добавлять разные продукты: {type(self).__name__} и {type(other).__name__}")
         return self.__price * self.quantity + other.__price * other.quantity
 
     def __str__(self):
