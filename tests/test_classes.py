@@ -65,7 +65,7 @@ def test_new_product() -> None:
 def test_add_product_Category(Category_Smart):
     product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
     Category.add_product(Category_Smart, product4)
-    assert Category_Smart.product_count == 4
+    assert Category_Smart.product_count == 10
 
 
 @pytest.fixture
