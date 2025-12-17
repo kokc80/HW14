@@ -7,6 +7,13 @@ class BaseProduct(ABC):
     def __init__(self, name, description, price, quantity):
         pass
 
+# Тестовый подкласс для проверки
+class TestProduct(BaseProduct):
+    def __init__(self, name, description, price, quantity):
+        self.name = name
+        self.description = description
+        self.price = price
+        self.quantity = quantity
 
 class MixinPrint:
     """Класс-миксин для печати в консоль информации в читаемом виде"""

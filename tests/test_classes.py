@@ -1,6 +1,8 @@
 import pytest
-
-from src.classes import Category, LawnGrass, Product, Smartphone
+import unittest
+from abc import ABC, abstractmethod
+from unittest.mock import patch, MagicMock
+from src.classes import Category, LawnGrass, Product, Smartphone, BaseProduct, TestProduct
 
 
 @pytest.fixture
@@ -97,3 +99,46 @@ def test_Lawngrass(lawngrass1):
     assert lawngrass1.country == "Россия"
     assert lawngrass1.germination_period == "7 дней"
     assert lawngrass1.color == "Зеленый"
+
+
+class TestBaseProduct(unittest.TestCase):
+
+    def test_abstract_class_instantiation_fails(self):
+        """Проверка, что нельзя создать экземпляр абстрактного класса"""
+        with self.assertRaises(TypeError):
+            BaseProduct("Test", "Desc", 100, 5)
+
+    def test_concrete_implementation_works(self):
+        """Проверка работы конкретной реализации"""
+        product = TestProduct("Laptop", "Gaming laptop", 999.99, 10)
+
+        self.assertEqual(product.name, "Laptop")
+        self.assertEqual(product.description, "Gaming laptop")
+        self.assertEqual(product.price, 999.99)
+        self.assertEqual(product.quantity, 10)
+
+    def test_required_attributes_exist(self):
+        """Проверка наличия обязательных атрибутов после инициализации"""
+        product = TestProduct("Phone", "Smartphone", 699.99, 20)
+
+        # Проверяем, что все атрибуты созданы
+        self.assertTrue(hasattr(product, 'name'))
+        self.assertTrue(hasattr(product, 'description'))
+        self.assertTrue(hasattr(product, 'price'))
+        self.assertTrue(hasattr(product, 'quantity'))
+
+    @patch('builtins.print')
+    def test_initialization_with_edge_cases(self, mock_print):
+        """Тест граничных случаев при инициализации"""
+        # Пустые строки
+        product1 = TestProduct("", "", 0, 0)
+        self.assertEqual(product1.name, "")
+        self.assertEqual(product1.price, 0)
+
+        # Отрицательные значения (если допустимо)
+        product2 = TestProduct("Negative", "Test", -10, -5)
+        self.assertEqual(product2.price, -10)
+
+
+if __name__ == '__main__':
+    unittest.main()
