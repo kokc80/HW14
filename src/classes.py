@@ -36,11 +36,12 @@ class Product(BaseProduct, MixinPrint):
     count_product = 0
 
     def __init__(self, name, description, price, quantity):
+        super().__init__(name=name, price=price, description=description, quantity=quantity)
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
-        # print(repr(self))
+        print(repr(self))
 
     @property
     def price(self):
@@ -63,10 +64,10 @@ class Product(BaseProduct, MixinPrint):
 
     def __add__(self, other):
         """Сложение двух продуктов по цене и количеству, если оба продукта одного класса"""
-        if isinstance(self, Category) is isinstance(other, Category):
+        if isinstance(other, self.__class__) is isinstance(other, Category):
             return (self.price * self.quantity) + (other.price * other.quantity)
         raise TypeError(f"Нельзя добавлять разные продукты: {type(self).__name__} и {type(other).__name__}")
-        return self.__price * self.quantity + other.__price * other.quantity
+        return (self.__price * self.quantity + other.__price * other.quantity)
 
     def __str__(self):
         return f"{self.name}, {self.__price} руб., остаток: {self.quantity} шт"
@@ -103,15 +104,6 @@ class Category:
             prod_count += product.quantity
         return f"{self.name}, {prod_count} шт"
 
-    new_product = Product.new_product(
-        {
-            "name": "Samsung Galaxy S23 Ultra",
-            "description": "256GB, Серый цвет, 200MP камера",
-            "price": 180000.0,
-            "quantity": 5,
-        }
-    )
-
 
 class Smartphone(Product):
     def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
@@ -128,3 +120,4 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
