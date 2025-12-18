@@ -7,6 +7,7 @@ class BaseProduct(ABC):
     def __init__(self, name, description, price, quantity):
         pass
 
+
 # Тестовый подкласс для проверки
 class TestProduct(BaseProduct):
     def __init__(self, name, description, price, quantity):
@@ -14,6 +15,7 @@ class TestProduct(BaseProduct):
         self.description = description
         self.price = price
         self.quantity = quantity
+
 
 class MixinPrint:
     """Класс-миксин для печати в консоль информации в читаемом виде"""
@@ -34,8 +36,11 @@ class Product(BaseProduct, MixinPrint):
     quantity: int
     count_category = 0
     count_product = 0
+    count_prod = 0
 
     def __init__(self, name, description, price, quantity):
+        if not quantity or quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         super().__init__(name=name, price=price, description=description, quantity=quantity)
         self.name = name
         self.description = description
@@ -104,6 +109,18 @@ class Category:
             prod_count += product.quantity
         return f"{self.name}, {prod_count} шт"
 
+    def middle_price(self):
+        prod_count = len(self.__products)
+        prod_sum = sum([product.price for product in self.__products])
+        middle = 0
+        try:
+            middle = (prod_sum / prod_count)
+        except ZeroDivisionError as e:
+            print(f"Ошибка: {e}")
+            middle = 0
+        finally:
+            return middle
+
 
 class Smartphone(Product):
     def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
@@ -120,4 +137,3 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
-

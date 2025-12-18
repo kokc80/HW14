@@ -1,7 +1,6 @@
 import pytest
 import unittest
-from abc import ABC, abstractmethod
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from src.classes import Category, LawnGrass, Product, Smartphone, BaseProduct, TestProduct
 
 
@@ -34,7 +33,7 @@ def test_category(Category_Smart):
     assert Category_Smart.description == (
         "Смартфоны, как средство не только коммуникации, но и получения " "дополнительных функций для удобства жизни."
     )
-    assert Category_Smart.category_count == 1
+    assert Category_Smart.category_count == 2
     assert Category_Smart.product_count == 3
 
 
@@ -102,6 +101,7 @@ def test_Lawngrass(lawngrass1):
 
 
 class TestBaseProduct(unittest.TestCase):
+    """класс для теста абстракного класса"""
 
     def test_abstract_class_instantiation_fails(self):
         """Проверка, что нельзя создать экземпляр абстрактного класса"""
@@ -142,3 +142,10 @@ class TestBaseProduct(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+category_empty = Category("Пустая категория", "Категория без продуктов", [])
+
+
+def test_middle_price(category_empty):
+    with pytest.raises(ZeroDivisionError):
+        middle_price (category_empty)
