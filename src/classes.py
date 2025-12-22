@@ -18,7 +18,7 @@ class TestProduct(BaseProduct):
 
 
 class MixinPrint:
-    """Класс-миксин для печати в консоль информации в читаемом виде"""
+    """Класс-миксин для печати в консоль информации в читаемом виде 16.2"""
     def __init__(self):
         print(repr(self))
 
@@ -69,10 +69,11 @@ class Product(BaseProduct, MixinPrint):
 
     def __add__(self, other):
         """Сложение двух продуктов по цене и количеству, если оба продукта одного класса"""
-        if isinstance(other, self.__class__) is isinstance(other, Category):
+        if isinstance(other, self.__class__) is isinstance(other, other.__class__):
             return (self.price * self.quantity) + (other.price * other.quantity)
-        raise TypeError(f"Нельзя добавлять разные продукты: {type(self).__name__} и {type(other).__name__}")
-        return (self.__price * self.quantity + other.__price * other.quantity)
+        else:
+            raise TypeError(f"Нельзя добавлять разные продукты: {type(self).__name__} и {type(other).__name__}")
+
 
     def __str__(self):
         return f"{self.name}, {self.__price} руб., остаток: {self.quantity} шт"
