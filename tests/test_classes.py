@@ -1,7 +1,7 @@
 import pytest
 import unittest
 from unittest.mock import patch
-from src.classes import Category, LawnGrass, Product, Smartphone, BaseProduct, TestProduct
+from src.classes import Category, LawnGrass, Product, Smartphone, BaseProduct, TestProduct, MixinPrint
 
 
 @pytest.fixture
@@ -140,12 +140,8 @@ class TestBaseProduct(unittest.TestCase):
         self.assertEqual(product2.price, -10)
 
 
-if __name__ == '__main__':
-    unittest.main()
-
-
-def test_mixin():
-    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+# if __name__ == '__main__':
+#     unittest.main()
 
 
 @pytest.fixture
@@ -161,5 +157,10 @@ def test_middle_price(category_mp):
 
 # тест ненулевого количества
 def test_quantity_zero():
-    with pytest.raises("Товар с нулевым количеством не может быть добавлен"):
-        return(Product("Iphone 15", "512GB, Gray space", 0, 0))
+    with pytest.raises(ValueError, match ='Товар с нулевым количеством не может быть добавлен') as e:
+        product_zero=Product("Iphone 15", "512GB, Gray space", 0, 0)
+
+
+#тест миксин
+def test_mixin():
+    assert repr(product1) == "Product(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)"

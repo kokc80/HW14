@@ -74,7 +74,6 @@ class Product(BaseProduct, MixinPrint):
         else:
             raise TypeError(f"Нельзя добавлять разные продукты: {type(self).__name__} и {type(other).__name__}")
 
-
     def __str__(self):
         return f"{self.name}, {self.__price} руб., остаток: {self.quantity} шт"
 
@@ -117,7 +116,7 @@ class Category:
         try:
             middle = (prod_sum / prod_count)
         except ZeroDivisionError as e:
-            print(f"Ошибка: {e}")
+            print(f"!Ошибка: {e}")
             middle = 0
         finally:
             return middle
