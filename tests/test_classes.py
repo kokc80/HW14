@@ -148,7 +148,7 @@ class TestBaseProduct(unittest.TestCase):
 def category_mp():
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 10)
     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-    return(Category("Пустая категория с 0", "Категория без продуктов", [product1,product2]))
+    return (Category("Пустая категория с 0", "Категория без продуктов", [product1, product2]))
 
 
 def test_middle_price(category_mp):
@@ -157,10 +157,10 @@ def test_middle_price(category_mp):
 
 # тест ненулевого количества
 def test_quantity_zero():
-    with pytest.raises(ValueError, match ='Товар с нулевым количеством не может быть добавлен') as e:
-        product_zero=Product("Iphone 15", "512GB, Gray space", 0, 0)
+    with pytest.raises(ValueError, match='Товар с нулевым количеством не может быть добавлен'):
+        product_zero = Product("Iphone 15", "512GB, Gray space", 0, 0)
 
 
-#тест миксин
+# тест миксин
 def test_mixin():
     assert repr(product1) == "Product(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)"
